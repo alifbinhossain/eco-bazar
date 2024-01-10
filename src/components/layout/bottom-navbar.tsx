@@ -28,7 +28,7 @@ export const BottomNavbar = () => {
               alt='Chevron Down'
             />
             <div
-              className='absolute bottom-0 left-0 right-0 bg-white translate-y-full h-0 group-hover:h-max transition-all duration-200
+              className='absolute bottom-0 left-0 right-0 z-20 bg-white translate-y-full h-0 group-hover:h-max transition-all duration-200
             border overflow-hidden'
             >
               <ul className='flex flex-col'>

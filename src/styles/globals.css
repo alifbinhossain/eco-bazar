@@ -82,6 +82,14 @@
     @apply bg-background text-foreground;
   }
 
+  h1 {
+    @apply text-[3.5rem] font-semibold leading-[120%] text-gray-900;
+  }
+
+  p {
+    @apply text-lg font-normal;
+  }
+
   .container {
     margin: 0 auto;
     width: calc(100% - 40px);

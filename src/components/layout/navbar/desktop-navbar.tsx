@@ -18,6 +18,7 @@ import {
   SheetTitle,
   SheetTrigger,
 } from '@/components/ui/sheet';
+import { Badge } from '@/components/ui/badge';
 
 const DesktopNavbar = () => {
   const inputRef = useRef<HTMLInputElement>(null);
@@ -38,7 +39,8 @@ const DesktopNavbar = () => {
         <div className='flex items-center gap-4'>
           <Sheet>
             <SheetTrigger asChild>
-              <Button size={'icon'} variant={'ghost'}>
+              <Button size={'icon'} variant={'ghost'} className='relative'>
+                <Badge className='absolute -top-1 -right-1 '>5</Badge>
                 <Image
                   width={24}
                   height={24}
@@ -67,7 +69,8 @@ const DesktopNavbar = () => {
 
           <Sheet>
             <SheetTrigger asChild>
-              <Button size={'icon'} variant={'ghost'}>
+              <Button size={'icon'} variant={'ghost'} className='relative'>
+                <Badge className='absolute -top-1 -right-1 '>8</Badge>
                 <Image
                   width={24}
                   height={24}

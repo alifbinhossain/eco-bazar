@@ -3,6 +3,7 @@ import '../styles/globals.css';
 import { cn } from '@/lib/utils';
 import { fontPoppins } from '@/lib/fonts';
 import Navbar from '@/components/layout/navbar/navbar';
+import { BottomNavbar } from '@/components/layout/bottom-navbar';
 
 export const metadata: Metadata = {
   title: 'Create Next App',
@@ -23,6 +24,7 @@ export default function RootLayout({
         )}
       >
         <Navbar />
+        <BottomNavbar />
         {children}
       </body>
     </html>

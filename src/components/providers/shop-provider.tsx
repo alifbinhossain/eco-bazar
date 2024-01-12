@@ -1,6 +1,6 @@
 'use client';
 
-import { createContext, useContext, useMemo, useState } from 'react';
+import { createContext, useContext, useEffect, useMemo, useState } from 'react';
 
 type ShopContextProps = {
   cart: string[] | [];
@@ -31,8 +31,17 @@ export const useShopContext = () => {
 export const ShopProvider: React.FC<{ children: React.ReactNode }> = ({
   children,
 }) => {
+  const [initialLoad, setInitialLoad] = useState(false);
+  useEffect(() => {
+    if (!initialLoad) {
+      setInitialLoad(true);
+    }
+  }, [initialLoad]);
+
+  let localStorage = typeof window !== 'undefined' ? window.localStorage : null;
+
   const [cart, setCart] = useState(
-    JSON.parse(localStorage.getItem('cart')!) || []
+    localStorage ? JSON.parse(localStorage.getItem('cart')!) || [] : []
   );
 
   const defaultValues = useMemo((): ReturnType<typeof useShopContext> => {
@@ -46,20 +55,27 @@ export const ShopProvider: React.FC<{ children: React.ReactNode }> = ({
 
       setCart: (id: string) => {
         if (cart.includes(id)) return;
-        localStorage.setItem('cart', JSON.stringify([...cart, id]));
+        localStorage &&
+          localStorage.setItem('cart', JSON.stringify([...cart, id]));
+
         setCart([...cart, id]);
       },
       removeCart: (id: string) => {
         const newCart = cart.filter((item: string) => item !== id);
-        localStorage.setItem('cart', JSON.stringify(newCart));
+        localStorage && localStorage.setItem('cart', JSON.stringify(newCart));
+
         setCart(newCart);
       },
       clearCart: () => {
-        localStorage.removeItem('cart');
+        localStorage && localStorage.removeItem('cart');
         setCart([]);
       },
     };
-  }, [cart]);
+  }, [cart, localStorage]);
+
+  if (!initialLoad) {
+    return null;
+  }
 
   return (
     <ShopContext.Provider value={defaultValues}>

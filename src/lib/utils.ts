@@ -12,3 +12,10 @@ export function slugify(str: string) {
     .replace(/[^\w-]+/g, '')
     .replace(/--+/g, '-');
 }
+
+export const getAmountByPercentage = (
+  amount: number,
+  percentage: number
+): number => {
+  return (amount / 100) * percentage;
+};

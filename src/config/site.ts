@@ -5,7 +5,7 @@ export const siteConfig = {
   description:
     'Eco Bazar - Your One-Stop Destination for Fresh and Organic Food Delights. Explore a bountiful selection of premium vegetables, succulent fruits, and refreshing beverages. Immerse yourself in a sustainable shopping experience that prioritizes quality, health, and environmental consciousness. Shop with confidence at Eco Bazar, where every purchase contributes to a greener tomorrow. Discover the taste of nature with our thoughtfully curated range of eco-friendly food items. Join us in embracing a healthier lifestyle while making a positive impact on the planet. Elevate your dining experience with the finest, freshest, and most flavorful produce, exclusively at Eco Bazar.',
   url: 'https://eco-bazar.vercel.app/',
-  ogImage: 'https://eco-bazar.vercel.app/opengraph-image.png',
+  ogImage: 'https://eco-bazar.vercel.app/opengraph-image.jpg',
 
   mainNavItems: [
     {

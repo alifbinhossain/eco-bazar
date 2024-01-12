@@ -112,6 +112,10 @@
     @apply text-lg font-normal;
   }
 
+  button {
+    @apply active:scale-95 duration-300 transition-all;
+  }
+
   .container {
     margin: 0 auto;
     width: calc(100% - 40px);

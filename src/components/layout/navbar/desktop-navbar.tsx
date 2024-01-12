@@ -5,8 +5,8 @@ import React from 'react';
 import { BrandLogo } from '@/components/brand-logo';
 import { SearchBox } from '@/components/search-box';
 import { Separator } from '@/components/ui/separator';
-import { Cart } from '@/components/cart/cart';
 import { Wishlist } from '@/components/wishlist/wishlist';
+import { Cart } from '@/components/cart/cart';
 
 const DesktopNavbar = () => {
   return (

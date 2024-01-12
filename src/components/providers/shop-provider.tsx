@@ -3,18 +3,26 @@
 import { createContext, useContext, useEffect, useMemo, useState } from 'react';
 
 type ShopContextProps = {
-  cart: string[] | [];
-  getCartProducts: (products: IProduct[]) => IProduct[] | [];
-  setCart: (id: string) => void;
-  removeCart: (id: string) => void;
+  cart: { id: string; quantity: number }[];
+  getCartProducts: (products: IProduct[]) => ICartProduct[] | [];
+  addToCart: ({ id, quantity }: { id: string; quantity?: number }) => void;
+  updateCart: ({
+    id,
+    operation,
+  }: {
+    id: string;
+    operation: 'increment' | 'decrement';
+  }) => void;
+  removeFromCart: (id: string) => void;
   clearCart: () => void;
 };
 
 const ShopContext = createContext<ShopContextProps>({
   cart: [],
   getCartProducts: () => [],
-  setCart: () => {},
-  removeCart: () => {},
+  addToCart: () => {},
+  updateCart: () => {},
+  removeFromCart: () => {},
   clearCart: () => {},
 });
 
@@ -43,7 +51,7 @@ export const ShopProvider: React.FC<{ children: React.ReactNode }> = ({
   //initialize local storage
   let localStorage = typeof window !== 'undefined' ? window.localStorage : null;
 
-  const [cart, setCart] = useState(
+  const [cart, setCart] = useState<{ id: string; quantity: number }[]>(
     localStorage ? JSON.parse(localStorage.getItem('cart')!) || [] : []
   );
 
@@ -52,26 +60,82 @@ export const ShopProvider: React.FC<{ children: React.ReactNode }> = ({
       cart,
 
       // this function will add product to the cart
-      setCart: (id: string) => {
-        if (cart.includes(id)) return;
-        localStorage &&
-          localStorage.setItem('cart', JSON.stringify([...cart, id]));
+      addToCart: ({ id, quantity = 1 }) => {
+        //check if the product is in the cart
+        if (cart.find((item) => item.id === id)) {
+          const newCart = cart.with(
+            cart.findIndex((item) => item.id === id),
+            {
+              id,
+              quantity,
+            }
+          );
 
-        setCart([...cart, id]);
+          localStorage && localStorage.setItem('cart', JSON.stringify(newCart));
+          setCart(newCart);
+
+          return;
+        } else {
+          localStorage &&
+            localStorage.setItem(
+              'cart',
+              JSON.stringify([...cart, { id, quantity }])
+            );
+          setCart([...cart, { id, quantity }]);
+        }
+      },
+
+      // this function will update cart
+      updateCart: ({ id, operation = 'increment' }) => {
+        //check if the product is in the cart
+        if (!cart.find((item) => item.id === id)) {
+          localStorage &&
+            localStorage.setItem(
+              'cart',
+              JSON.stringify([...cart, { id, quantity: 1 }])
+            );
+          setCart([...cart, { id, quantity: 1 }]);
+
+          return;
+        }
+        const itemIndex = cart.findIndex((item) => item.id === id);
+        const { quantity: currentQuantity } = cart[itemIndex];
+        if (operation === 'decrement' && currentQuantity > 1) {
+          const newCart = cart.with(itemIndex, {
+            id,
+            quantity: currentQuantity - 1,
+          });
+          setCart(newCart);
+        } else if (operation === 'increment') {
+          const newCart = cart.with(itemIndex, {
+            id,
+            quantity: currentQuantity + 1,
+          });
+          setCart(newCart);
+        }
+
+        localStorage && localStorage.setItem('cart', JSON.stringify([...cart]));
       },
 
       // this function will return products that are in the cart
       getCartProducts: (products: IProduct[]) => {
-        return products.filter((product: IProduct) =>
-          cart.includes(product.id)
-        );
+        return products
+          .filter((product: IProduct) =>
+            cart.find((item) => item.id === product.id)
+          )
+          .map((product) => {
+            return {
+              ...product,
+              cartQuantity: cart.find((item) => item.id === product.id)
+                ?.quantity!,
+            };
+          });
       },
 
       // this function will remove product from the cart
-      removeCart: (id: string) => {
-        const newCart = cart.filter((item: string) => item !== id);
+      removeFromCart: (id: string) => {
+        const newCart = cart.filter((item) => item.id !== id);
         localStorage && localStorage.setItem('cart', JSON.stringify(newCart));
-
         setCart(newCart);
       },
 

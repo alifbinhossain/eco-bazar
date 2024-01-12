@@ -6,7 +6,7 @@ import { siteConfig } from '@/config/site';
 
 import { buttonVariants } from '@/components/ui/button';
 
-import { ProductCard } from '@/components/cards/product-card';
+import { ProductCard } from '@/components/cards/product-card/product-card';
 
 interface Props {
   products?: IProduct[];

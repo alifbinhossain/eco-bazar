@@ -8,10 +8,10 @@ import { Button } from '@/components/ui/button';
 import { useShopContext } from '@/components/providers/shop-provider';
 
 interface Props {
-  product: IProduct;
+  product: ICartProduct;
 }
-export const CartProduct: React.FC<Props> = ({ product }) => {
-  const { removeCart } = useShopContext();
+export const CartItem: React.FC<Props> = ({ product }) => {
+  const { removeFromCart } = useShopContext();
   return (
     <div className='flex items-center justify-between py-2'>
       <div className='flex items-center gap-2'>
@@ -23,19 +23,25 @@ export const CartProduct: React.FC<Props> = ({ product }) => {
         />
 
         <div>
-          <h6 className=' capitalize text-sm font-normal text-gray-900'>
+          <h6 className='capitalize text-sm font-normal text-gray-900'>
             {product.name}
           </h6>
 
-          <p className='text-gray-900 text-sm font-semibold'>
-            $ {product.price.toFixed(2)}
+          <p className='mt-1 text-sm  space-x-1'>
+            <span className='font-normal text-gray-500'>
+              {product.cartQuantity} {product.unit}
+            </span>
+            <span className='font-normal text-gray-500'>x</span>
+            <span className='font-semibold text-gray-900'>
+              $ {product.price.toFixed(2)}
+            </span>
           </p>
         </div>
       </div>
 
       <Button
         onClick={() => {
-          removeCart(product.id);
+          removeFromCart(product.id);
           toast('Product removed from cart');
         }}
         variant={'ghost'}

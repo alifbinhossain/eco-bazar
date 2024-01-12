@@ -15,7 +15,7 @@ import {
 import { Badge } from '@/components/ui/badge';
 import { Button } from '@/components/ui/button';
 import { useShopContext } from '@/components/providers/shop-provider';
-import { CartProduct } from './cart-product';
+import { CartItem } from './cart-item';
 import { siteConfig } from '@/config/site';
 
 export const Cart = () => {
@@ -42,7 +42,7 @@ export const Cart = () => {
 
           <div className='flex-1 overflow-auto scroll pr-8 divide-y'>
             {getCartProducts(siteConfig.popularProducts).map((product) => {
-              return <CartProduct key={product.name} product={product} />;
+              return <CartItem key={product.name} product={product} />;
             })}
           </div>
           <SheetFooter className='flex flex-col gap-2'>
@@ -53,7 +53,7 @@ export const Cart = () => {
               <p className='text-base font-semibold text-gray-900'>
                 $
                 {getCartProducts(siteConfig.popularProducts)
-                  .reduce((a, b) => a + b.price, 0)
+                  .reduce((a, b) => a + b.price * b.cartQuantity, 0)
                   .toFixed(2)}
               </p>
             </div>
@@ -78,7 +78,12 @@ export const Cart = () => {
       </Sheet>
       <div>
         <p className='text-gray-700 text-xs'>Shopping Cart :</p>
-        <p className='text-gray-900 text-sm font-medium'>$57.00</p>
+        <p className='text-gray-900 text-sm font-medium'>
+          $
+          {getCartProducts(siteConfig.popularProducts)
+            .reduce((a, b) => a + b.price * b.cartQuantity, 0)
+            .toFixed(2)}
+        </p>
       </div>
     </div>
   );

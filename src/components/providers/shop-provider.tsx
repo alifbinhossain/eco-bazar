@@ -18,6 +18,7 @@ const ShopContext = createContext<ShopContextProps>({
   clearCart: () => {},
 });
 
+// This hook can be used to access the ShopContext
 export const useShopContext = () => {
   const context = useContext(ShopContext);
 
@@ -31,6 +32,7 @@ export const useShopContext = () => {
 export const ShopProvider: React.FC<{ children: React.ReactNode }> = ({
   children,
 }) => {
+  //using this state to prevent hydration mismatch
   const [initialLoad, setInitialLoad] = useState(false);
   useEffect(() => {
     if (!initialLoad) {
@@ -38,6 +40,7 @@ export const ShopProvider: React.FC<{ children: React.ReactNode }> = ({
     }
   }, [initialLoad]);
 
+  //initialize local storage
   let localStorage = typeof window !== 'undefined' ? window.localStorage : null;
 
   const [cart, setCart] = useState(
@@ -47,12 +50,8 @@ export const ShopProvider: React.FC<{ children: React.ReactNode }> = ({
   const defaultValues = useMemo((): ReturnType<typeof useShopContext> => {
     return {
       cart,
-      getCartProducts: (products: IProduct[]) => {
-        return products.filter((product: IProduct) =>
-          cart.includes(product.id)
-        );
-      },
 
+      // this function will add product to the cart
       setCart: (id: string) => {
         if (cart.includes(id)) return;
         localStorage &&
@@ -60,12 +59,23 @@ export const ShopProvider: React.FC<{ children: React.ReactNode }> = ({
 
         setCart([...cart, id]);
       },
+
+      // this function will return products that are in the cart
+      getCartProducts: (products: IProduct[]) => {
+        return products.filter((product: IProduct) =>
+          cart.includes(product.id)
+        );
+      },
+
+      // this function will remove product from the cart
       removeCart: (id: string) => {
         const newCart = cart.filter((item: string) => item !== id);
         localStorage && localStorage.setItem('cart', JSON.stringify(newCart));
 
         setCart(newCart);
       },
+
+      // this function will clear the cart
       clearCart: () => {
         localStorage && localStorage.removeItem('cart');
         setCart([]);

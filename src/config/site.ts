@@ -1,7 +1,7 @@
 export type SiteConfig = typeof siteConfig;
 
 export const siteUrl =
-  process.env.NEXT_PUBLIC_APP_URL || 'https://eco-bazar.vercel.app/';
+  process.env.NEXT_PUBLIC_APP_URL || 'https://eco-bazar.vercel.app';
 
 export const siteConfig = {
   name: 'Eco Bazar',

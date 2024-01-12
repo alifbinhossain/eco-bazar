@@ -12,8 +12,17 @@ import { Toaster } from '@/components/ui/sonner';
 import { ShopProvider } from '@/components/providers/shop-provider';
 
 export const metadata: Metadata = {
+  metadataBase: new URL(siteConfig.url),
   title: siteConfig.name,
   description: siteConfig.description,
+  keywords: [...siteConfig.keywords],
+  authors: [
+    {
+      name: 'alifbinhossain',
+      url: 'https://alifbinhossain.vercel.app/',
+    },
+  ],
+  creator: 'alifbinhossain',
   openGraph: {
     type: 'website',
     locale: 'en_US',
@@ -21,6 +30,17 @@ export const metadata: Metadata = {
     title: siteConfig.name,
     description: siteConfig.description,
     siteName: siteConfig.name,
+    images: [siteConfig.ogImage],
+  },
+  twitter: {
+    card: 'summary_large_image',
+    title: siteConfig.name,
+    description: siteConfig.description,
+    images: [siteConfig.ogImage],
+    creator: '@AlifBinHossain2',
+  },
+  icons: {
+    icon: '/icon.png',
   },
 };
 

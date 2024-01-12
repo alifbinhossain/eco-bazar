@@ -1,11 +1,39 @@
 export type SiteConfig = typeof siteConfig;
 
+export const siteUrl =
+  process.env.NEXT_PUBLIC_APP_URL || 'https://eco-bazar.vercel.app/';
+
 export const siteConfig = {
   name: 'Eco Bazar',
   description:
     'Eco Bazar - Your One-Stop Destination for Fresh and Organic Food Delights. Explore a bountiful selection of premium vegetables, succulent fruits, and refreshing beverages. Immerse yourself in a sustainable shopping experience that prioritizes quality, health, and environmental consciousness. Shop with confidence at Eco Bazar, where every purchase contributes to a greener tomorrow. Discover the taste of nature with our thoughtfully curated range of eco-friendly food items. Join us in embracing a healthier lifestyle while making a positive impact on the planet. Elevate your dining experience with the finest, freshest, and most flavorful produce, exclusively at Eco Bazar.',
   url: 'https://eco-bazar.vercel.app/',
-  ogImage: 'https://eco-bazar.vercel.app/opengraph-image.jpg',
+  ogImage: `${siteUrl}/opengraph-image.jpg`,
+  keywords: [
+    'nextjs',
+    'react',
+    'react server components',
+    'tailwind',
+    'shadcn/ui',
+    'e-commerce',
+    'headless e-commerce',
+    'eco-bazar',
+    'Organic produce',
+    'Fresh fruits',
+    'Sustainable shopping',
+    'Eco-friendly groceries',
+    'Healthy lifestyle',
+    'Green market',
+    'Locally sourced',
+    'Nutrient-rich vegetables',
+    'Natural beverages',
+    'Environmentally conscious',
+    'Farm-to-table goodness',
+    'Earth-friendly choices',
+    'Wholesome food',
+    'Conscious consumption',
+    'Eco Bazar delights',
+  ],
 
   mainNavItems: [
     {

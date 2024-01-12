@@ -101,15 +101,15 @@
   }
 
   h1 {
-    @apply text-[3.5rem];
+    @apply text-[2rem] md:text-[3rem] lg:text-[3.5rem];
   }
 
   h2 {
-    @apply text-[2rem];
+    @apply text-[1.5rem]  lg:text-[2rem];
   }
 
   p {
-    @apply text-lg font-normal;
+    @apply text-base lg:text-lg font-normal;
   }
 
   button {
@@ -118,7 +118,7 @@
 
   .container {
     margin: 0 auto;
-    width: calc(100% - 40px);
+    width: calc(100% - 30px);
     max-width: 1320px;
   }
 
@@ -130,7 +130,7 @@
 
   @media (min-width: 1080px) {
     .container {
-      width: calc(100% - 160px);
+      width: calc(100% - 180px);
     }
   }
 

@@ -23,7 +23,14 @@ export const ProductCard: React.FC<Props> = ({ product }) => {
         <PreviewProduct product={product} />
       </div>
 
-      <Image width={254} height={230} src={product.image} alt={product.name} />
+      <div className='flex justify-center'>
+        <Image
+          width={254}
+          height={230}
+          src={product.image}
+          alt={product.name}
+        />
+      </div>
 
       <div className='mt-4 flex justify-between items-center'>
         <div>

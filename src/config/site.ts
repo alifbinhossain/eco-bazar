@@ -357,4 +357,15 @@ export const siteConfig = {
       category: 'Fruits',
     },
   ] satisfies IProduct[],
+
+  socials: [
+    {
+      platform: 'facebook',
+      url: '',
+    },
+    {
+      platform: 'whatsapp',
+      url: '',
+    },
+  ] satisfies { platform: ISocialPlatform; url: string }[],
 };

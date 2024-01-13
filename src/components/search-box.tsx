@@ -11,23 +11,34 @@ import { Button } from '@/components/ui/button';
 interface ISearchBoxProps extends React.InputHTMLAttributes<HTMLInputElement> {
   handleClick: (e: React.MutableRefObject<HTMLInputElement | null>) => void;
   containerClass?: string;
+  inputContainerClass?: string;
   inputClass?: string;
   buttonClass?: string;
+  buttonText?: string;
+  disableIcon?: boolean;
 }
 
 export const SearchBox: React.FC<ISearchBoxProps> = ({
   handleClick,
   containerClass,
+  inputContainerClass,
   inputClass,
   buttonClass,
+  buttonText = 'Search',
+  disableIcon = false,
   ...props
 }) => {
   const inputRef = useRef<HTMLInputElement | null>(null);
 
   return (
     <div className={cn('w-[498px] grid grid-cols-4 bg-white', containerClass)}>
-      <div className='col-span-3 flex items-center gap-2  py-3 px-4 border rounded-l-[6px]'>
-        <Search />
+      <div
+        className={cn(
+          'col-span-3 flex items-center gap-2  py-3 px-4 border rounded-l-[6px]',
+          inputContainerClass
+        )}
+      >
+        {!disableIcon && <Search />}
         <Input
           placeholder='Search'
           className={cn(
@@ -55,7 +66,7 @@ export const SearchBox: React.FC<ISearchBoxProps> = ({
           buttonClass
         )}
       >
-        Search
+        {buttonText}
       </Button>
     </div>
   );

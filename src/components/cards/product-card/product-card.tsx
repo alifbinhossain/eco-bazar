@@ -1,12 +1,12 @@
 import Image from 'next/image';
+
 import { cn, getAmountByPercentage } from '@/lib/utils';
 
+import { MyCountDown } from '@/components/my-countdown';
 import { Badge } from '@/components/ui/badge';
 import { AddProductToCart } from './_actions/add-product-to-cart';
 import { PreviewProduct } from './_actions/preview-product';
 import { AddProductToWishlist } from './_actions/add-product-to-wishlist';
-import { Button } from '@/components/ui/button';
-import { MyCountDown } from '@/components/my-countdown';
 
 interface Props {
   product: IProduct;

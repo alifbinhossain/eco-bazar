@@ -21,6 +21,7 @@ import { Button } from '@/components/ui/button';
 import { useShopContext } from '@/components/providers/shop-provider';
 import { CartItem } from './cart-item';
 import { siteConfig } from '@/config/site';
+import { ShopNowButton } from '../buttons/shop-now';
 
 export const Cart = () => {
   const { cart, getCartProducts } = useShopContext();
@@ -67,9 +68,7 @@ export const Cart = () => {
                   <p>Your cart is empty!</p>
                 </div>
 
-                <Button className='rounded-full text-base px-8 py-4 h-fit'>
-                  Go to Shop
-                </Button>
+                <ShopNowButton />
               </div>
             )}
 

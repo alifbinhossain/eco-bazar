@@ -10,7 +10,7 @@ import {
   CarouselNext,
   CarouselPrevious,
 } from '@/components/ui/carousel';
-import { Button } from '@/components/ui/button';
+import { ShopNowButton } from '@/components/buttons/shop-now';
 
 export const Hero = () => {
   return (
@@ -38,9 +38,7 @@ export const Hero = () => {
                       Free shipping on all your order. we deliver, you enjoy
                     </p>
 
-                    <Button className='mt-8 rounded-full px-6 py-3 lg:px-10 lg:py-4 h-max text-sm lg:text-base'>
-                      Shop Now
-                    </Button>
+                    <ShopNowButton className='mt-8' />
                   </div>
                 </div>
               </CarouselItem>
